@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet var labelOperation: UILabel!
+    @IBOutlet var labelOperation: UILabel!  //pole s cislami
     @IBOutlet var buttons: [UIButton]!
     var stringNumber = ""
     var firstNumber: Float?
@@ -44,7 +44,7 @@ class ViewController: UIViewController {
             countOfClicks += 1
             
             if countOfClicks == 1 {
-                guard let labelText = labelOperation.text else {return}
+                guard let labelText = labelOperation.text else {return}  // proveryajem est' li text v labelText
                 guard let floatLabelText = Float(labelText) else {return}
                 
                 firstNumber = floatLabelText
@@ -54,7 +54,7 @@ class ViewController: UIViewController {
             switch sender.tag {
             case 10: operation = .sum
             case 11: operation = .sub
-            case  12 : operation = .mult
+            case 12: operation = .mult
             case 13: operation = .div
             default: break
                 
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
             
             stringNumber = ""
             
-        case 14:
+        case 14: //Result btn
             
             guard let labelText = labelOperation.text else {return}
             guard let floatLabelText = Float(labelText) else {return}
@@ -76,8 +76,18 @@ class ViewController: UIViewController {
             switch operation {
             case .sum: result = sn + fn
             case .div: result = fn / sn
-            case .mult : result = fn * sn
+            case .mult: result = fn * sn
             case .sub: result = fn - sn
+            }
+            
+            if operation == .div && sn == 0{
+                labelOperation.text = "Error"
+                stringNumber = ""
+                firstNumber = nil
+                secondNumber = nil
+                countOfClicks = 0
+                break
+                
             }
             
             guard let result = result else {return}
@@ -94,19 +104,26 @@ class ViewController: UIViewController {
             firstNumber = nil
             secondNumber = nil
             countOfClicks = 0
-            
-            
-        default:
-            break
-            
-            
-            
-            
+       
+        case 15:  //Clear btn
+            labelOperation.text = ""
+            stringNumber = ""
+            firstNumber = nil
+            secondNumber = nil
+            countOfClicks = 0
+         
+        case 16: //CE btn
+            guard labelOperation.text != nil else {return} //guard let labelText = labelOperation.text else {return}
+          //  guard stringNumber != "" else {return}
+            if stringNumber != "" {
+                if stringNumber == "0" {
+                   break
+                }
+                stringNumber.removeLast()
+                labelOperation.text = stringNumber
+            }
+        default: break
         }
-        
-        
-        
-        
     }
 }
 
