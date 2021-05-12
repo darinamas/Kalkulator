@@ -104,24 +104,21 @@ class ViewController: UIViewController {
             firstNumber = nil
             secondNumber = nil
             countOfClicks = 0
-       
+            
         case 15:  //Clear btn
             labelOperation.text = ""
             stringNumber = ""
             firstNumber = nil
             secondNumber = nil
             countOfClicks = 0
-         
+            
         case 16: //CE btn
-            guard labelOperation.text != nil else {return} //guard let labelText = labelOperation.text else {return}
-          //  guard stringNumber != "" else {return}
-            if stringNumber != "" {
-                if stringNumber == "0" {
-                   break
-                }
+            guard let labelText = labelOperation.text else {return}
+            guard stringNumber != "" else {return}
+           
                 stringNumber.removeLast()
                 labelOperation.text = stringNumber
-            }
+    
         default: break
         }
     }
