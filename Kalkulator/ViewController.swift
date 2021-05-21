@@ -113,7 +113,7 @@ class ViewController: UIViewController {
             countOfClicks = 0
             
         case 16: //CE btn
-            guard let labelText = labelOperation.text else {return}
+            guard let _ = labelOperation.text else {return}
             guard stringNumber != "" else {return}
            
                 stringNumber.removeLast()
